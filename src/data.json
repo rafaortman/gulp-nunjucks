@@ -1,0 +1,13 @@
+{
+    "site_description": "Estudando Nunjucks",
+    "navigation": [
+        {
+            "name"  : "home",
+            "url"   : "/"
+        },
+        {
+            "name"  : "about",
+            "url"   : "/about"
+        }
+    ]
+}
