@@ -11,9 +11,11 @@
 <body>
     <header id="siteTopo">
         <div id="siteBranding"> 
-            <h1>
-                {{site_description}}
-            </h1>
+            <a href="{{navigation[0].url}}">
+                <h1>
+                    {{site_description}}
+                </h1>
+            </a>
         </div>
         {% include "./partials/nav.njk" %} 
     </header>

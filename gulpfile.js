@@ -111,11 +111,16 @@ function minImg() {
     ); 
 }
 
-function del() {
-    return gulp.src(['./_public', './_build' ], {read: false})
+function del_p() {
+    return gulp.src('./_public', {read: false})
+        .pipe(clean());
+}
+
+function del_b() {
+    return gulp.src('./_build', {read: false})
         .pipe(clean());
 }
 
 exports.default = watch;
-exports.del = del;
+exports.del = series(del_p, del_b);
 exports.build = series(js, img, scss, nunjucks, minJs, minImg, minCss, minHtml);
