@@ -3,11 +3,11 @@
     "navigation": [
         {
             "name"  : "home",
-            "url"   : "/"
+            "url"   : "index.html"
         },
         {
             "name"  : "about",
-            "url"   : "/about"
+            "url"   : "about.html"
         }
     ]
 }

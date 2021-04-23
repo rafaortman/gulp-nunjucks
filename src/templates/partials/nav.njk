@@ -1,11 +1,11 @@
-<nav>
-    <ul>
+<nav class="menu_container">
+    <ul class="menu">
         {% for item in navigation %}
             <li>
                 <a href="{{item.url}}">
-                    {{item.name}}
+                    {{item.name}} 
                 </a>
             </li>
-        {% endfor %}
+        {% endfor %} 
     </ul>
 </nav>

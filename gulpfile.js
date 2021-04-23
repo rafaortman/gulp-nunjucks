@@ -16,12 +16,12 @@ const imagemin = require('gulp-imagemin');
 function scss() {
     return (
         gulp
-        .src('./src/scss/**/*.scss')
+        .src('./src/scss/*')
         .pipe(sourcemaps.init())
         .pipe(sass()).on("error", sass.logError)
         .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public/'))
+        .pipe(gulp.dest('./_public/'))
         .pipe(browserSync.stream())
     );    
 }
@@ -29,7 +29,7 @@ function scss() {
 function js() {
     return (
         gulp.src('./src/js/**/*')
-            .pipe(gulp.dest('./public/js/'))
+            .pipe(gulp.dest('./_public/js/'))
             .pipe(browserSync.stream())
     );    
 }
@@ -37,7 +37,7 @@ function js() {
 function img() {
     return (
         gulp.src('./src/img/**/*')
-            .pipe(gulp.dest('./public/img/'))
+            .pipe(gulp.dest('./_public/img/'))
             .pipe(browserSync.stream())
     );    
 }
@@ -53,7 +53,8 @@ function nunjucks() {
                 path: ['src/templates'],
             })
         )
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('_public'))
+        .pipe(browserSync.stream())
 }
 
 function reload() {
@@ -67,50 +68,51 @@ function watch() {
     nunjucks();
     browserSync.init({
         server: {
-            baseDir: "./public/"
+            baseDir: "./_public/"
         },
         notify: false
     });
 
     gulp.watch('./src/js/**/*', js);
     gulp.watch('./src/img/**/*', img);
-    gulp.watch('./src/scss/**/*.scss', scss);
+    gulp.watch('./src/scss/*', scss);
+    gulp.watch('./src/data.json', nunjucks);
     gulp.watch('./src/**/*.njk', nunjucks);
-    gulp.watch('./public/**/*.**').on('change', reload);
+    gulp.watch('./_public/**/*.**').on('change', reload);
 }
 
 function minCss() {
-    return gulp.src('./public/**/*.css')
+    return gulp.src('./_public/**/*.css')
         .pipe(cleanCSS())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('_build'));
 }
 
 function minHtml() {
     return (
-        gulp.src('./public/**/*.html')
+        gulp.src('./_public/**/*.html')
             .pipe(htmlmin({ collapseWhitespace: true }))
-            .pipe(gulp.dest('dist'))
+            .pipe(gulp.dest('_build'))
     ); 
 }
 
 function minJs() {
     return (
-        gulp.src('./public/js/scripts.js')
+        gulp.src('./_public/js/scripts.js')
             .pipe(minify())
-            .pipe(gulp.dest('dist/js'))
+            .pipe(gulp.dest('_build/js'))
     ); 
 }
 
 function minImg() {
     return (
-        gulp.src('./public/img/**/*')
+        gulp.src('./_public/img/**/*')
             .pipe(imagemin())
-            .pipe(gulp.dest('dist/img'))
+            .pipe(gulp.dest('_build/img'))
     ); 
 }
 
 function del() {
-    return gulp.src(['./public', './dist' ], {read: false})
+    return gulp.src(['./_public', './_build' ], {read: false})
         .pipe(clean());
 }
 

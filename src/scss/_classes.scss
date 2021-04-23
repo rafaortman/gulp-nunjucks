@@ -1,0 +1,71 @@
+@for $i from 0 through 6 {
+    .m-#{$i} {
+        margin: #{$i}rem;
+    }
+    .mt-#{$i} { 
+        margin-top: #{$i}rem;
+    }
+    .mb-#{$i} {
+        margin-bottom: #{$i}rem;
+    }
+    .ml-#{$i} {
+        margin-left: #{$i}rem;
+    }
+    .mr-#{$i} {
+        margin-right: #{$i}rem;
+    }
+    .p-#{$i} {
+        padding: #{$i}rem;
+    }
+    .pt-#{$i} {
+        padding-top: #{$i}rem;
+    }
+    .pb-#{$i} {
+        padding-bottom: #{$i}rem;
+    }
+    .pl-#{$i} {
+        padding-left: #{$i}rem;
+    }
+    .pr-#{$i} {
+        padding-right: #{$i}rem;
+    }
+}
+
+$list: center, right, left;
+
+@each $pos in $list {
+    .ta#{str-slice($pos, 1, 1)} {
+        text-align: $pos;
+    }
+}
+
+$sizes: 1600, 1200, 1024, 768, 640, 480, 400;
+
+@each $size in $sizes {
+    .max#{$size} {
+        display: block;
+        margin: auto;
+        width: 100%;
+        max-width: #{$size}px;
+        padding: 0 1rem;
+    }
+}
+
+$displays: block, flex, grid, inline, inline-block, inline-flex;
+
+@each $display in $displays {
+    .display-#{$display} {
+        display: #{$display};
+    }
+}
+
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
